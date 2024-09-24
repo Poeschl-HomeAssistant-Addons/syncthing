@@ -1,0 +1,23 @@
+name: Deploy
+
+# yamllint disable-line rule:truthy
+on:
+  release:
+    types:
+      - published
+  workflow_run:
+    workflows: ["Addon CI"]
+    branches: [main]
+    types:
+      - completed
+
+jobs:
+  workflows:
+    uses: Poeschl-HomeAssistant-Addons/workflows/.github/workflows/addon-deploy.yaml@main
+    permissions:
+      contents: read
+      packages: write
+    secrets:
+      dispatch_token: ${{ secrets.DISPATCH_TOKEN }}
+    with:
+      version: "${{ github.event.release.tag_name }}"
