@@ -1,0 +1,14 @@
+name: Run Package updates
+
+# yamllint disable-line rule:truthy
+on:
+  schedule:
+    - cron: "0 0 * * FRI"
+  workflow_dispatch:
+
+jobs:
+  workflows:
+    uses: Poeschl-HomeAssistant-Addons/workflows/.github/workflows/addon-update-packages.yaml@add-package-update-action
+    permissions:
+      contents: write
+      pull-requests: write
