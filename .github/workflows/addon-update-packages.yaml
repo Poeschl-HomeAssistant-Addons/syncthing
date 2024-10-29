@@ -8,7 +8,7 @@ on:
 
 jobs:
   workflows:
-    uses: Poeschl-HomeAssistant-Addons/workflows/.github/workflows/addon-update-packages.yaml@add-package-update-action
+    uses: Poeschl-HomeAssistant-Addons/workflows/.github/workflows/addon-update-packages.yaml@main
     permissions:
       contents: write
       pull-requests: write
