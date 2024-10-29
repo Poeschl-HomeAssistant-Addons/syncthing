@@ -12,3 +12,5 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    secrets:
+      pr_token: ${{ secrets.DISPATCH_TOKEN }}
