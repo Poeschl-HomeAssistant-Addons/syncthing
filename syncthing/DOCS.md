@@ -1,6 +1,6 @@
 ## Configuration
 
-Configuration is done via [Syncthing's web UI](/hassio/68413af6_syncthing/ingress) (embedded into Home Assistant). First start the add-on from the [*Info* tab](/hassio/addon/68413af6_syncthing/info) and then click `OPEN WEB UI`.
+Configuration is done via [Syncthing's web UI](/hassio/ingress/68413af6_syncthing) (embedded into Home Assistant). First start the add-on from the [*Info* tab](/hassio/addon/68413af6_syncthing/info) and then click `OPEN WEB UI`.
 
 After starting up, Syncthing displays a notice (in a yellow box at the top) saying
 
@@ -12,7 +12,7 @@ This can safely be ignored since it [does not apply to this add-on](https://gith
 
 If you want to monitor the Syncthing add-on via Home Assistant's [**Syncthing** integration](https://www.home-assistant.io/integrations/syncthing/), you need to expose Syncthing's web UI to the (local) network rather than only to the [Home Assistant Supervisor](https://developers.home-assistant.io/docs/supervisor).
 
-To do so, go to the add-on's [*Configuration* tab](/hassio/addon/68413af6_syncthing/config), toggle `Show disabled ports` and enter a port number in the field labelled *Web frontend (not needed with Ingress)* (`8384`, as per the default, is fine). Click `SAVE`, switch to the [*Info* tab](/hassio/addon/68413af6_syncthing/info) and click `RESTART`.
+To do so, go to the add-on's [*Configuration* tab](/hassio/addon/68413af6_syncthing/config), toggle `Show disabled ports` and enter a port number in the field labelled *Web frontend (not needed with Ingress)* (`8384`, as per the default, is fine). Click `Save`, switch to the [*Info* tab](/hassio/addon/68413af6_syncthing/info) and click `Restart`.
 
 To finish the setup, follow the sections [*Prerequisites*](https://www.home-assistant.io/integrations/syncthing/#prerequisites) and [*Configuration*](https://www.home-assistant.io/integrations/syncthing/#configuration) from the integration's documentation.
 
