@@ -12,3 +12,5 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    secrets:
+      updater_token: ${{ secrets.UPDATER_TOKEN }}
