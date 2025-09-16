@@ -13,8 +13,20 @@ else
   bashio::log.info "Detected syncthing address: $ip"
 fi
 
+bashio::log.info "Waiting for Syncthing to be reachable..."
 bashio::net.wait_for 8384 "$ip"
-bashio::log.info 'Post-Start syncthing setup'
 
-apikey=$(grep -o '<apikey>[^<]*' /config/config.xml | sed 's/<apikey>//;s/<\/apikey>//')
-syncthing cli --gui-address="$ip:8384" --gui-apikey="$apikey" config gui insecure-admin-access set true
+bashio::log.info "Checking Syncthing health..."
+until curl --insecure -s "http://$ip:8384/rest/noauth/health" | grep -o --color=never "OK"; do
+  bashio::log.info "Syncthing not yet healthy, waiting..."
+  sleep 5
+done
+
+bashio::log.info 'Post-Start syncthing setup'
+apikey=$(grep -o '<apikey>[^<]*' /config/config.xml | sed 's/<apikey>//')
+if [ -n "$apikey" ]; then
+  bashio::log.info "Configuring Syncthing via API..."
+  syncthing cli --gui-address="$ip:8384" --gui-apikey="$apikey" config gui insecure-admin-access set true
+else
+  bashio::log.warning "Could not extract API key from config.xml - skipping post-setup"
+fi
