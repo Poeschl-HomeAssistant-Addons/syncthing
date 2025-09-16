@@ -17,7 +17,7 @@ bashio::log.info "Waiting for Syncthing to be reachable..."
 bashio::net.wait_for 8384 "$ip"
 
 bashio::log.info "Checking Syncthing health..."
-max_retries=24  # Wait up to 2 minutes (24 * 5s)
+max_retries=60  # Wait up to 5 minutes (60 * 5s)
 retries=0
 until curl --insecure -s "http://$ip:8384/rest/noauth/health" | grep -o --color=never "OK"; do
   retries=$((retries + 1))
