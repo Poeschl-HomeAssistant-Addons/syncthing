@@ -17,16 +17,16 @@ bashio::log.info "Waiting for Syncthing to be reachable..."
 bashio::net.wait_for 8384 "$ip"
 
 bashio::log.info "Checking Syncthing health..."
-max_retries=60  # Wait up to 5 minutes (60 * 5s)
+max_retries=21600  # Wait up to 6 hours (21600 * 10s)
 retries=0
 until curl --insecure -s "http://$ip:8384/rest/noauth/health" | grep -o --color=never "OK"; do
   retries=$((retries + 1))
   if [ "$retries" -ge "$max_retries" ]; then
-    bashio::log.error "Syncthing did not become healthy after $((max_retries * 5)) seconds. Exiting."
+    bashio::log.error "Syncthing did not become healthy after $((max_retries * 10)) seconds. Exiting."
     exit 1
   fi
   bashio::log.info "Syncthing not yet healthy, waiting... (attempt $retries/$max_retries)"
-  sleep 5
+  sleep 10
 done
 
 bashio::log.info 'Post-Start syncthing setup'
