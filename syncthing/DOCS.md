@@ -28,7 +28,7 @@ To permanently hold your data, synced folders must be put under one of the follo
 | `/addons`        | Local Home Assistant add-ons.                                                                                                                              |
 | `/backups`       | Home Assistant backups.                                                                                                                                    |
 | `/config`        | Syncthing's own configuration.                                                                                                                             |
-| `/data`          | Syncthing's own internal data (state). Not recommended to store synced folders.                                                                            |
+| `/data`          | Syncthing's own internal data (state). Not recommended to store synced folders (unless the configuration option `state_dir` points to a different path).   |
 | `/homeassistant` | Home Assistant's own configuration.                                                                                                                        |
 | **`/media`**     | Media files to be shared between add-ons and Home Assistant. See below for a possible way to automatically mount external storage devices under this path. |
 | ***`/share`***   | Data to be shared between add-ons and Home Assistant. This is the default path for synced folders.                                                         |
