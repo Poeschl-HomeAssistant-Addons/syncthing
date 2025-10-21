@@ -1,6 +1,6 @@
 #!/command/with-contenv bashio
 # shellcheck shell=bash
-set -e
+set -euo pipefail
 
 bashio::log.info 'Intializing Syncthing'
 
@@ -23,6 +23,18 @@ then
     [ -f "/data/config/${CONF_FILE}" ] && mv -fn "/data/config/${CONF_FILE}" /config/ && rm -f "/data/config/${CONF_FILE}"
   done
   mv -fn /data/config/* /data/ && rm -rf /data/config
+fi
+
+# set Syncthing state dir to user-defined value if indicated
+if bashio::config.has_value 'state_dir'
+then
+  STDATADIR="$(bashio::config 'state_dir')"
+  if [ ! -d "${STDATADIR}" ]
+  then
+    mkdir -p "${STDATADIR}"
+  fi
+  bashio::log.info "Setting Syncthing state directory to ${STDATADIR}"
+  export STDATADIR
 fi
 
 bashio::log.info 'Starting Syncthing'
